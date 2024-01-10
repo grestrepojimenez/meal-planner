@@ -42,11 +42,11 @@ export default async function Home() {
   const orderedMeals = formattedMeals.sort((a, b) => (a.order > b.order) ? 1 : -1)
 
   return (
-    <main className='flex p-8'>
-      <section className='w-[72%] border-r border-gray-400 '>
+    <main className='flex p-[3.5vw] flex-col md:flex-row'>
+      <section className='  md:w-[72%] border-r border-gray-400'>
         <TimelineComponent meals={orderedMeals} />
       </section>
-      <aside className='p-8 fixed right-[24%]'>
+      <aside className=' md:fixed p-8 right-[24%]'>
         <Clock />
       </aside>
     </main>

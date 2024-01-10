@@ -25,7 +25,7 @@ export default function TimelineItem({ meal, position, containerRef }) {
       <header>
         <h1 className={`
         ${isIntersecting
-            ? 'text-3xl mb-10'
+            ? 'text-clamp-30 mb-10'
             : 'text-right mb-3'
           }
           `}>
@@ -33,7 +33,7 @@ export default function TimelineItem({ meal, position, containerRef }) {
           {meal.type}</h1>
       </header>
       <main className={`
-          flex border border-gray-400 h-4/5
+          flex flex-col md:flex-row border border-gray-400 h-4/5
         ${isIntersecting
           ? ''
           : 'h-[116px]'
@@ -43,20 +43,20 @@ export default function TimelineItem({ meal, position, containerRef }) {
         <img className='object-cover h-full w-2/5 aspect-square' src={meal.image}></img>
         <div className={`
         ${isIntersecting
-            ? 'p-8'
+            ? 'p-[3vw]'
             : 'p-2 flex flex-col justify-center'
           }
           `}>
           <h2 className={`
         ${isIntersecting
-              ? 'text-3xl mb-7'
+              ? 'text-clamp-30 mb-7'
               : ''
             }
           `}>
             {position} -  {meal.name}
           </h2>
           {isIntersecting &&
-            <ul className='text-xl'>
+            <ul className='text-clamp-20'>
               <li>
                 Proteina: {meal.protein}
               </li>
