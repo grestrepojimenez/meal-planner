@@ -13,7 +13,7 @@ export default function Clock() {
   }, [])
 
   return (
-    <div className="relative">
+    <div className="relative min-h-[300px] w-[300px] scale-90">
       <div className="clock">
         <div
           className="hour_hand"

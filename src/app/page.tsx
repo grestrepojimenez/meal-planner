@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { Client } from '@notionhq/client'
 import TimelineComponent from '@/components/Timeline/Timeline.component'
 import Clock from '@/components/Clock/Clock.component'
+import Todo from '@/components/Todo/Todo.component'
+import DateString from '@/components/DateString/DateString.component'
 
 const DATABASE_ID = process.env.DATABASE_ID
 
@@ -42,12 +44,14 @@ export default async function Home() {
   const orderedMeals = formattedMeals.sort((a, b) => (a.order > b.order) ? 1 : -1)
 
   return (
-    <main className='flex p-[3.5vw] flex-col md:flex-row'>
-      <section className='  md:w-[72%] border-r border-gray-400'>
+    <main className='flex py-[3.5vw] flex-col h-screen md:flex-row'>
+      <section className='overflow-y-auto  md:w-[72%] '>
         <TimelineComponent meals={orderedMeals} />
       </section>
-      <aside className=' md:fixed p-8 right-[24%]'>
+      <aside className='overflow-y-auto overflow-x-hidden flex flex-col gap-4 md:px-[4vw]'>
+        <DateString />
         <Clock />
+        <Todo />
       </aside>
     </main>
   )
