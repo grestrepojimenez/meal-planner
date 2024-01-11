@@ -1,6 +1,5 @@
 "use client"
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { useRef } from 'react'
 export default function TimelineItem({ meal, position, containerRef }) {
 
   const { isIntersecting, target } = useIntersectionObserver({
@@ -15,7 +14,7 @@ export default function TimelineItem({ meal, position, containerRef }) {
       `
         transition-all  duration-300  
         flex flex-col
-        px-6
+        px-12
         text-2xl
         ${isIntersecting
         ? 'w-full min-h-[400px]'
@@ -40,7 +39,13 @@ export default function TimelineItem({ meal, position, containerRef }) {
         }
           `}>
 
-        <img className='object-cover h-full w-2/5 aspect-square' src={meal.image}></img>
+        <img className={`object-cover h-auto aspect-square
+        ${isIntersecting
+            ? 'w-2/5'
+            : ' w-1/4'
+          } 
+        `}
+          src={meal.image}></img>
         <div className={`
         ${isIntersecting
             ? 'p-[3vw]'
@@ -56,18 +61,18 @@ export default function TimelineItem({ meal, position, containerRef }) {
             {position} -  {meal.name}
           </h2>
           {isIntersecting &&
-            <ul className='text-clamp-20'>
+            <ul className='text-clamp-18'>
               <li>
-                Proteina: {meal.protein}
+                Proteinas: {meal.proteins.map((protein)=> <span>{protein.name} </span>)}
               </li>
               <li>
-                Verduras: {meal.vegetable}
+                Verduras: {meal.vegetables.map((vegetable)=> <span>{vegetable.name} </span>)}
               </li>
               <li>
-                Carbohidratos: {meal.carbs}
+                Carbohidratos: {meal.carbs.map((carb)=> <span>{carb.name} </span>)}
               </li>
               <li>
-                Grasa: {meal.fat}
+                Grasa: {meal.fats}
               </li>
             </ul>
           }
