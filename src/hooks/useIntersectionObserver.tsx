@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function useIntersectionOberver(options?: IntersectionObserverInit) {
   const [isIntersecting, setIsIntersecting] = useState<boolean>(true);
-  const target = useRef();
+  const target = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {

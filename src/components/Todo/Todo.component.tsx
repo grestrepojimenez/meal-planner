@@ -2,12 +2,16 @@
 import React, { useState } from 'react'
 
 
-export default function Todo({ meals }) {
+export default function Todo({ currentMeal }) {
   
-  const todos = meals[0]?.todos
-  const initialTodosWithState = JSON.parse(localStorage.getItem('todos') || JSON.stringify(todos));
+  const todos = currentMeal?.todos
+  console.log({todos})
+
+  const initialTodosWithState =  JSON.stringify(todos) || [];
 
   const [todosWithState, setTodosWithState] = useState(initialTodosWithState);
+
+  console.log('with state',[todosWithState])
 
   const handleOnChange = (id) => {
     const uodatedTodosWithState = todosWithState.map((todo) => {

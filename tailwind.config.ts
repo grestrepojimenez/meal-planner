@@ -14,7 +14,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontSize: {
-        'clamp-30': "clamp(1.2rem, 5vw, 1.9rem)",
+        'clamp-30': "clamp(1.1rem, 5vw, 1.9rem)",
         'clamp-20': "clamp(1rem, 4vw, 1.6rem)",
         'clamp-18': "clamp(1rem, 4vw, 1.3rem)",
       },

@@ -1,6 +1,15 @@
 "use client"
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-export default function TimelineItem({ meal, position, containerRef }) {
+import { meal } from '@/types/meal.type';
+import { RefObject, useEffect } from 'react';
+
+interface TimelineItemProps {
+  meal: meal,
+  position: number,
+  containerRef: RefObject<HTMLDivElement>,
+}
+
+export default function TimelineItem({ meal, position, containerRef, setCurrentMeal }: TimelineItemProps) {
 
   const { isIntersecting, target } = useIntersectionObserver({
     root: containerRef.current,
@@ -8,23 +17,29 @@ export default function TimelineItem({ meal, position, containerRef }) {
     // threshold: 1
   });
 
+  useEffect(() => {
+    if (isIntersecting) {
+      setCurrentMeal(meal)
+    }
+  }, [position, isIntersecting])
+
 
   return (
-    <article ref={target} id={position} className={
+    <article ref={target} className={
       `
         transition-all  duration-300  
         flex flex-col
-        px-12
-        text-2xl
+        px-[3.5vw]
+        text-clamp-18
         ${isIntersecting
-        ? 'w-full min-h-[400px]'
+        ? 'w-full h-auto md:h-[436px]'
         : ' w-3/4 self-end min-h-[270px]'
       }
        `}>
       <header>
         <h1 className={`
         ${isIntersecting
-            ? 'text-clamp-30 mb-10'
+            ? 'text-clamp-30 mb-[2vw]'
             : 'text-right mb-3'
           }
           `}>
@@ -39,10 +54,10 @@ export default function TimelineItem({ meal, position, containerRef }) {
         }
           `}>
 
-        <img className={`object-cover h-auto aspect-square
+        <img className={`object-cover max-h-[170px] md:aspect-square md:max-h-[400px]
         ${isIntersecting
-            ? 'w-2/5'
-            : ' w-1/4'
+            ? 'md:w-2/5'
+            : 'md:w-1/4'
           } 
         `}
           src={meal.image}></img>
@@ -63,13 +78,13 @@ export default function TimelineItem({ meal, position, containerRef }) {
           {isIntersecting &&
             <ul className='text-clamp-18'>
               <li>
-                Proteinas: {meal.proteins.map((protein)=> <span>{protein.name} </span>)}
+                Proteinas: {meal.proteins.map((protein) => <span>{protein.name} </span>)}
               </li>
               <li>
-                Verduras: {meal.vegetables.map((vegetable)=> <span>{vegetable.name} </span>)}
+                Verduras: {meal.vegetables.map((vegetable) => <span>{vegetable.name} </span>)}
               </li>
               <li>
-                Carbohidratos: {meal.carbs.map((carb)=> <span>{carb.name} </span>)}
+                Carbohidratos: {meal.carbs.map((carb) => <span>{carb.name} </span>)}
               </li>
               <li>
                 Grasa: {meal.fats}
