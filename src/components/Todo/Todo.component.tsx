@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 export default function Todo({ currentMeal }) {
   
-  const todos = currentMeal?.todos
+  const todos = currentMeal?.todos || []
   console.log({todos})
 
   const initialTodosWithState =  JSON.stringify(todos) || [];
@@ -28,13 +28,13 @@ export default function Todo({ currentMeal }) {
     localStorage.setItem('todos', JSON.stringify(uodatedTodosWithState))
   };
 
-  const checkedTasks = todosWithState.filter(todo => todo.checked)
-  const unCheckedTasks = todosWithState.filter((todo) => !todo.checked)
+  // const checkedTasks = todosWithState.filter(todo => todo.checked)
+  // const unCheckedTasks = todosWithState.filter((todo) => !todo.checked)
 
   return (
     <div className='text-xl mt-3 flex flex-col gap-4 justify-between'>
       <ul className='flex flex-col gap-3'>
-        {unCheckedTasks.map(({ id, name }) =>
+        {todos.map(({ id, name }) =>
           <li>
             <input
               type='checkbox'
@@ -53,7 +53,7 @@ export default function Todo({ currentMeal }) {
       </ul>
       <hr className=' border-gray-600' />
 
-      <ul className='flex flex-col gap-3'>
+      {/* <ul className='flex flex-col gap-3'>
         {checkedTasks.map(({ id, name }) =>
           <li>
             <input
@@ -70,7 +70,9 @@ export default function Todo({ currentMeal }) {
           </li>
         )}
 
-      </ul>
+      </ul> */}
+
+      
     </div>
   )
 }

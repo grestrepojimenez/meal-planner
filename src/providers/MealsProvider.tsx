@@ -41,6 +41,40 @@ export default async function MealsProvider() {
   const formattedMeals = extractResultsFromNotionApi(meals)
   const orderedMeals = formattedMeals.sort((a: meal, b: meal) => (a.order > b.order) ? 1 : -1)
 
+  // const orderedMeals = [{
+  //   id: 1,
+  //   name: 'Title 1',
+  //   type: 'type',
+  //   proteins: [
+  //     {
+  //       name: 'proteins 1 '
+  //     }
+  //   ],
+  //   vegetables: [
+  //     {
+  //       name: 'vegetable 1 '
+  //     }
+  //   ],
+  //   carbs: [
+  //     {
+  //       name: 'carb 1 '
+  //     }
+  //   ],
+  //   fats: 'fats',
+  //   dia: 'day',
+  //   image: '/example1.png',
+  //   order: '1',
+  //   todos: [
+  //     {
+  //     id: 0,
+  //     name: 'todo 1'
+  //   },
+  //   {
+  //     id: 0,
+  //     name: 'todo 2'
+  //   }
+  // ],
+  // }]
 
   return (
     <MainPage meals={orderedMeals} />
