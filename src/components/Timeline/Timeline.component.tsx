@@ -7,14 +7,14 @@ import { meal } from '@/types/meal.type';
 interface TimelineComponentProps {
   meals: meal[];
 }
-export default function TimelineComponent({ meals, setCurrentMeal }: TimelineComponentProps) {
-  const containerRef = useRef();
+export default function TimelineComponent({ meals }: TimelineComponentProps) {
+  const containerRef = useRef<HTMLInputElement>(null);
 
   return (
     <section ref={containerRef} className='flex flex-col gap-6 over'>
       {
         meals.map((meal, index) =>
-          <TimelineItem key={meal.id} meal={meal} position={index} containerRef={containerRef} setCurrentMeal={setCurrentMeal} />
+          <TimelineItem key={meal.id} meal={meal} position={index} containerRef={containerRef} />
         )
       }
 

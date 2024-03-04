@@ -9,7 +9,7 @@ interface TimelineItemProps {
   containerRef: RefObject<HTMLDivElement>,
 }
 
-export default function TimelineItem({ meal, position, containerRef, setCurrentMeal }: TimelineItemProps) {
+export default function TimelineItem({ meal, position, containerRef }: TimelineItemProps) {
 
   const { isIntersecting, target } = useIntersectionObserver({
     root: containerRef.current,
@@ -19,7 +19,7 @@ export default function TimelineItem({ meal, position, containerRef, setCurrentM
 
   useEffect(() => {
     if (isIntersecting) {
-      setCurrentMeal(meal)
+      console.log('set current meal')
     }
   }, [position, isIntersecting])
 
@@ -78,13 +78,13 @@ export default function TimelineItem({ meal, position, containerRef, setCurrentM
           {isIntersecting &&
             <ul className='text-clamp-18'>
               <li>
-                Proteinas: {meal.proteins.map((protein) => <span>{protein.name} </span>)}
+                Proteinas: {meal.proteins.map((protein: any, index: number) => <span key={index}>{protein.name} </span>)}
               </li>
               <li>
-                Verduras: {meal.vegetables.map((vegetable) => <span>{vegetable.name} </span>)}
+                Verduras: {meal.vegetables.map((vegetable: any, index: number) => <span key={index}>{vegetable.name} </span>)}
               </li>
               <li>
-                Carbohidratos: {meal.carbs.map((carb) => <span>{carb.name} </span>)}
+                Carbohidratos: {meal.carbs.map((carb: any, index: number) => <span key={index}>{carb.name} </span>)}
               </li>
               <li>
                 Grasa: {meal.fats}

@@ -1,20 +1,22 @@
 "use client"
 import React, { useState } from 'react'
+import { meal } from '@/types/meal.type'
 
 
-export default function Todo({ currentMeal }) {
-  
+interface ITodoProps {
+  currentMeal?: meal
+}
+
+export default function Todo({ currentMeal }: ITodoProps) {
+
   const todos = currentMeal?.todos || []
-  console.log({todos})
 
-  const initialTodosWithState =  JSON.stringify(todos) || [];
+  const initialTodosWithState = JSON.stringify(todos) || [];
 
-  const [todosWithState, setTodosWithState] = useState(initialTodosWithState);
+  const [todosWithState, setTodosWithState] = useState<any>(initialTodosWithState);
 
-  console.log('with state',[todosWithState])
-
-  const handleOnChange = (id) => {
-    const uodatedTodosWithState = todosWithState.map((todo) => {
+  const handleOnChange = (id: number) => {
+    const uodatedTodosWithState = todosWithState.map((todo: any) => {
       if (todo.id === id) {
         return {
           ...todo,
@@ -34,11 +36,10 @@ export default function Todo({ currentMeal }) {
   return (
     <div className='text-xl mt-3 flex flex-col gap-4 justify-between'>
       <ul className='flex flex-col gap-3'>
-        {todos.map(({ id, name }) =>
-          <li>
+        {todos.map(({ id, name }: any) =>
+          <li key={id}>
             <input
               type='checkbox'
-              key={id}
               id={id}
               name={name}
               value={name}
@@ -72,7 +73,7 @@ export default function Todo({ currentMeal }) {
 
       </ul> */}
 
-      
+
     </div>
   )
 }

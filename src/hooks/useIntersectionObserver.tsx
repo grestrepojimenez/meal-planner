@@ -3,13 +3,15 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function useIntersectionOberver(options?: IntersectionObserverInit) {
   const [isIntersecting, setIsIntersecting] = useState<boolean>(true);
-  const target = useRef(null);
+  const target = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       setIsIntersecting(entry.isIntersecting);
     }, options);
-    observer.observe(target.current);
+    if(target?.current){
+      observer.observe(target.current );
+    }
     return () => observer.disconnect();
   }, []);
 
