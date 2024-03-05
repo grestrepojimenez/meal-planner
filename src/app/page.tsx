@@ -14,16 +14,17 @@ const notion = new Client({
 
 const extractResultsFromNotionApi = (results: any) =>
   results.map(({ properties, id }: any) => {
-    const { Tipo, Proteina, Dia, Name, Imagen, Verduras, Carbohidratos, Grasa, Orden, TODOS } = properties;
+    console.log(properties.Detalle.rich_text[0]?.plain_text)
+    const { Comida, Proteina, Dia, Detalle, Imagen, Verdura, Carbohidratos, Grasa, Orden, TODOS } = properties;
     return {
       id,
-      name: Name.title[0]?.plain_text,
-      type: Tipo.multi_select[0]?.name,
+      name: Detalle.rich_text[0]?.plain_text,
+      type: Comida.select.name,
       proteins: Proteina.multi_select,
-      vegetables: Verduras.multi_select,
+      vegetables: Verdura.multi_select,
       carbs: Carbohidratos.multi_select,
       fats: Grasa.multi_select[0]?.name,
-      dia: Dia.multi_select[0]?.name,
+      dia: Dia.title.plain_text,
       image: Imagen.files[0]?.file?.url,
       order: Orden.number,
       todos: TODOS.multi_select,

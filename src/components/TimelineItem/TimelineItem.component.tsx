@@ -10,7 +10,7 @@ interface TimelineItemProps {
 }
 
 export default function TimelineItem({ meal, position, containerRef }: TimelineItemProps) {
-
+// console.log({meal})
   const { isIntersecting, target } = useIntersectionObserver({
     root: containerRef.current,
     rootMargin: '-37%',
