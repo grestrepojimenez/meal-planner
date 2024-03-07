@@ -45,7 +45,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
           }
           `}>
 
-          {meal.type}</h1>
+         {meal.day} - {meal.type}</h1>
       </header>
       <main className={`
           flex flex-col md:flex-row border border-gray-400 h-4/5

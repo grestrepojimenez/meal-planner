@@ -14,7 +14,7 @@ const notion = new Client({
 
 const extractResultsFromNotionApi = (results: any) =>
   results.map(({ properties, id }: any) => {
-    console.log(properties.Detalle.rich_text[0]?.plain_text)
+    // console.log(properties)
     const { Comida, Proteina, Dia, Detalle, Imagen, Verdura, Carbohidratos, Grasa, Orden, TODOS } = properties;
     return {
       id,
@@ -24,7 +24,7 @@ const extractResultsFromNotionApi = (results: any) =>
       vegetables: Verdura.multi_select,
       carbs: Carbohidratos.multi_select,
       fats: Grasa.multi_select[0]?.name,
-      dia: Dia.title.plain_text,
+      day: Dia.title[0]?.plain_text,
       image: Imagen.files[0]?.file?.url,
       order: Orden.number,
       todos: TODOS.multi_select,

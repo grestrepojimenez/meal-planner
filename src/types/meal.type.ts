@@ -6,7 +6,7 @@ export interface meal {
     vegetables: any,
     carbs:  any,
     fats: string,
-    dia: string,
+    day: string,
     image: string,
     order: number,
     todos: any,
