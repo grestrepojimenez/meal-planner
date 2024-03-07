@@ -1,6 +1,7 @@
 "use client"
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { meal } from '@/types/meal.type';
+import Image from 'next/image';
 import { RefObject, useEffect } from 'react';
 
 interface TimelineItemProps {
@@ -10,7 +11,7 @@ interface TimelineItemProps {
 }
 
 export default function TimelineItem({ meal, position, containerRef }: TimelineItemProps) {
-// console.log({meal})
+  // console.log({meal})
   const { isIntersecting, target } = useIntersectionObserver({
     root: containerRef.current,
     rootMargin: '-37%',
@@ -54,13 +55,19 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
         }
           `}>
 
-        <img className={`object-cover max-h-[170px] md:aspect-square md:max-h-[400px]
+        <Image
+          className={`object-cover max-h-[170px] md:aspect-square md:max-h-[400px]
         ${isIntersecting
-            ? 'md:w-2/5'
-            : 'md:w-1/4'
-          } 
+              ? 'md:w-2/5'
+              : 'md:w-1/4'
+            } 
         `}
-          src={meal.image}></img>
+          width={300}
+          height={170}
+          alt={meal.name}
+          src={meal.image}
+        />
+        
         <div className={`
         ${isIntersecting
             ? 'p-[3vw]'
