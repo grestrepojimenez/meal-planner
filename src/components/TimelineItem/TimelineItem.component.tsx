@@ -62,8 +62,8 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
               : 'md:w-1/4'
             } 
         `}
-          width={300}
-          height={170}
+          width={400}
+          height={300}
           alt={meal.name}
           src={meal.image}
         />
