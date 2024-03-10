@@ -20,9 +20,10 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
 
   useEffect(() => {
     if (isIntersecting) {
-      console.log('set current meal')
+      // console.log('set current meal')
     }
   }, [position, isIntersecting])
+
 
 
   return (
@@ -36,7 +37,9 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
         ? 'w-full h-auto md:h-[436px]'
         : ' w-3/4 self-end min-h-[270px]'
       }
-       `}>
+       `}
+      id={String(position)}
+    >
       <header>
         <h1 className={`
         ${isIntersecting
@@ -45,7 +48,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
           }
           `}>
 
-         {meal.day} - {meal.type}</h1>
+          {meal.day} - {meal.type}</h1>
       </header>
       <main className={`
           flex flex-col md:flex-row border border-gray-400 h-4/5
@@ -67,7 +70,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
           alt={meal.name}
           src={meal.image}
         />
-        
+
         <div className={`
         ${isIntersecting
             ? 'p-[3vw]'
