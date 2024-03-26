@@ -34,7 +34,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
         px-[3.5vw]
         text-clamp-18
         ${isIntersecting
-        ? 'w-full h-auto md:h-[436px]'
+        ? 'w-full h-auto '
         : ' w-3/4 self-end min-h-[270px]'
       }
        `}
@@ -51,7 +51,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
           {meal.day} - {meal.type}</h1>
       </header>
       <main className={`
-          flex flex-col md:flex-row border border-gray-400 h-4/5
+          flex flex-col md:flex-row border border-gray-400
         ${isIntersecting
           ? ''
           : 'h-[116px]'
@@ -65,8 +65,8 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
               : 'md:w-1/4'
             } 
         `}
-          width={400}
-          height={300}
+          width={700}
+          height={400}
           alt={meal.name}
           src={meal.image}
         />
