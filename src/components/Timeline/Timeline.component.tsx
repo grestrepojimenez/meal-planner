@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import TimelineItem from '../TimelineItem/TimelineItem.component';
 import { meal } from '@/types/meal.type';
+import useScrollIntoView from './useScrollIntoView';
 
 interface TimelineComponentProps {
   meals: meal[];
@@ -20,16 +21,13 @@ function getWeekNumber(date: Date): number {
   return weeksElapsed;
 }
 
-// Example usage:
 const today = new Date();
 const currentWeekNumber = getWeekNumber(today);
-console.log(`The current week number is: ${currentWeekNumber}`);
-
 
 export default function TimelineComponent({ meals }: TimelineComponentProps) {
   const containerRef = useRef<HTMLInputElement>(null);
 
-  const [currentMeals, setCurrentMeals] = useState<meal[]>([])
+  const [currentMeal, setCurrentMeal] = useState<meal[]>([])
 
   useEffect(() => {
     const date = new Date();
@@ -43,20 +41,21 @@ export default function TimelineComponent({ meals }: TimelineComponentProps) {
 
     const mealDay = `${dayName} ${mealWeekNumber}`;
 
-    const foundCurrentMeals = meals.filter((meal) => mealDay === meal.day);
+    const foundCurrentMeal = meals.filter((meal) => mealDay === meal.day);
 
-    setCurrentMeals(foundCurrentMeals);
-
+    setCurrentMeal(foundCurrentMeal)
   }, [])
 
-  if (!currentMeals.length) {
+  useScrollIntoView(String(currentMeal[0]?.order))
+
+  if (!meals.length) {
     return null;
   }
 
   return (
     <section ref={containerRef} className='flex flex-col gap-6 over'>
       {
-        currentMeals.map((meal, index) =>
+        meals.map((meal, index) =>
           <TimelineItem key={meal.id} meal={meal} position={index} containerRef={containerRef} />
         )
       }

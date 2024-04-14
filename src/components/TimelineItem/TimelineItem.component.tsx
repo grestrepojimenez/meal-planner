@@ -38,7 +38,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
         : ' w-3/4 self-end min-h-[270px]'
       }
        `}
-      id={String(position)}
+      id={String(position+1)}
     >
       <header>
         <h1 className={`
@@ -83,7 +83,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
               : ''
             }
           `}>
-            {position} -  {meal.name}
+            {position+1} -  {meal.name}
           </h2>
           {isIntersecting &&
             <ul className='text-clamp-18'>
