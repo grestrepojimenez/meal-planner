@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import TimelineItem from '../TimelineItem/TimelineItem.component';
 import { meal } from '@/types/meal.type';
 import useScrollIntoView from './useScrollIntoView';
+import { useCurrentMeal } from '@/contexts/CurrentMealContext';
 
 interface TimelineComponentProps {
   meals: meal[];
@@ -26,8 +27,9 @@ const currentWeekNumber = getWeekNumber(today);
 
 export default function TimelineComponent({ meals }: TimelineComponentProps) {
   const containerRef = useRef<HTMLInputElement>(null);
+  const { setCurrentMeal } = useCurrentMeal();
 
-  const [currentMeal, setCurrentMeal] = useState<meal[]>([])
+  const [currentMealForScroll, setCurrentMealForScroll] = useState<meal[]>([])
 
   useEffect(() => {
     const date = new Date();
@@ -43,23 +45,35 @@ export default function TimelineComponent({ meals }: TimelineComponentProps) {
 
     const foundCurrentMeal = meals.filter((meal) => mealDay === meal.day);
 
-    setCurrentMeal(foundCurrentMeal)
-  }, [])
+    setCurrentMealForScroll(foundCurrentMeal);
+    
+    // Set the first meal as current meal for the context
+    if (foundCurrentMeal.length > 0) {
+      setCurrentMeal(foundCurrentMeal[0]);
+    } else {
+      setCurrentMeal(null);
+    }
+  }, [meals, setCurrentMeal])
 
-  useScrollIntoView(String(currentMeal[0]?.order))
+  useScrollIntoView(String(currentMealForScroll[0]?.order))
 
   if (!meals.length) {
     return null;
   }
 
   return (
-    <section ref={containerRef} className='flex flex-col gap-6 over'>
-      {
-        meals.map((meal, index) =>
-          <TimelineItem key={meal.id} meal={meal} position={index} containerRef={containerRef} />
-        )
-      }
-
+    <section ref={containerRef} className='flex flex-col gap-6 py-6 px-6  mx-auto'>
+      <div className='text-center mb-6 px-4'>
+        <h1 className='text-clamp-30 font-bold text-gray-800 mb-2'>Plan de Comidas</h1>
+      </div>
+      
+      <div className='space-y-6 md:space-y-8'>
+        {
+          meals.map((meal, index) =>
+            <TimelineItem key={meal.id} meal={meal} position={index} containerRef={containerRef} />
+          )
+        }
+      </div>
     </section>
   )
 }

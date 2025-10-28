@@ -1,15 +1,24 @@
 "use client"
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 const useScrollIntoView = (sectionId: string) => {
-	const router = useRouter();
-
 	useEffect(() => {
-		// Navegar a la URL que contiene el identificador de la sección
-		router.push(`/#${sectionId}`);
+		if (!sectionId) return;
+		
+		// Small delay to ensure DOM is ready
+		const timer = setTimeout(() => {
+			const element = document.getElementById(sectionId);
+			if (element) {
+				element.scrollIntoView({ 
+					behavior: 'smooth', 
+					block: 'center',
+					inline: 'nearest'
+				});
+			}
+		}, 100);
 
-	}, [router, sectionId]);
+		return () => clearTimeout(timer);
+	}, [sectionId]);
 
 	return null;
 };
