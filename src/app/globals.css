@@ -66,3 +66,20 @@ html {
 .bg-gradient-success {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
+
+/* 3D Card Flip Styles */
+.transform-style-preserve-3d {
+    transform-style: preserve-3d;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}

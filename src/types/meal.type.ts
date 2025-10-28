@@ -10,4 +10,6 @@ export interface meal {
     image: string,
     order: number,
     todos: any,
+    calories?: number,
+    recipeSteps?: string[],
 }
