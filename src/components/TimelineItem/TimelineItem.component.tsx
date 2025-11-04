@@ -83,7 +83,7 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
                     : 'bg-gray-200 text-gray-600'
                   }
                 `}>
-                  #{position + 1}
+                  #{position + 1}  {meal.day}
                 </span>
                 <div className="flex items-center space-x-2">
                     <span className={`
@@ -106,20 +106,6 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
                   </span>
                 </div>
               </div>
-              <h1 
-                id={`meal-title-${position}`}
-                className={`
-                font-bold text-gray-800
-                ${isIntersecting ? 'text-clamp-30' : 'text-clamp-20'}
-                transition-all duration-300
-              `}>
-                {meal.day}
-              </h1>
-              {isIntersecting && (
-                <p className="text-sm text-gray-500 mt-2">
-                  Haz clic para ver la receta paso a paso
-                </p>
-              )}
             </header>
 
             <main className={`
@@ -127,18 +113,16 @@ export default function TimelineItem({ meal, position, containerRef }: TimelineI
               ${isIntersecting ? 'block' : 'hidden'}
             `}>
               <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-                <div className="md:w-2/5">
                   <div className="relative overflow-hidden rounded-lg md:rounded-xl">
                     <Image
                       className="object-cover w-full h-40 sm:h-48 md:h-56 lg:h-64 transition-transform duration-300 hover:scale-105"
                       width={400}
-                      height={300}
+                      height={400}
                       alt={meal.name}
                       src={meal.image}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                   </div>
-                </div>
 
                 <div className="md:w-3/5 space-y-3 md:space-y-4">
                   <h2 
