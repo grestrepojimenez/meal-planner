@@ -13,7 +13,7 @@ interface TimelineItemProps {
 
 export default function TimelineItem({ meal, position, containerRef }: TimelineItemProps) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const { recipeSteps, isLoading } = useMealEnhancement(meal);
+  const { recipeSteps, isLoading } = useMealEnhancement(meal, isFlipped);
   
   const { isIntersecting, target } = useIntersectionObserver({
     root: containerRef.current,

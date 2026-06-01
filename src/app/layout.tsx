@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { CurrentMealProvider } from '@/contexts/CurrentMealContext'
+import Navigation from '@/components/Navigation/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,9 +26,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+        <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
           <CurrentMealProvider>
-            {children}
+            <Navigation />
+            <div className="flex-1 overflow-auto">
+              {children}
+            </div>
           </CurrentMealProvider>
         </div>
       </body>
