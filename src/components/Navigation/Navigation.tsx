@@ -31,6 +31,16 @@ export default function Navigation() {
             >
               Administrar Comidas
             </Link>
+            <Link
+              href="/planificacion-semanal"
+              className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
+                pathname?.startsWith('/planificacion-semanal')
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+              }`}
+            >
+              Planificación Semanal
+            </Link>
           </div>
         </div>
       </div>
